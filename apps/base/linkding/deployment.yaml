@@ -25,7 +25,13 @@ spec:
 
           securityContext:
             allowPrivilegeEscalation: false
-
+          
+          envFrom:
+            # - configMapRef:
+            #    name: linkding-configmap
+            - secretRef:
+                name: linkding-container-env
+          
           volumeMounts:
             - name: linkding-data
               mountPath: /etc/linkding/data
