@@ -1,0 +1,22 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cert-manager
+  namespace: cert-manager
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: cert-manager
+      version: "v1.21.2"   # pinned; the Pi runs v1.21.1
+      sourceRef:
+        kind: HelmRepository
+        name: jetstack
+        namespace: cert-manager
+      interval: 12h
+  values:
+    # cert-manager ships its CRDs as chart templates, switched on here
+    # (not via Flux's install.crds, which only handles a chart's crds/ folder).
+    crds:
+      enabled: true
+      keep: true   # keep CRDs, and so every Certificate, if the release is ever removed

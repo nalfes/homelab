@@ -1,0 +1,17 @@
+# One wildcard for every PRIVATE app (*.lab.claudebelanger.dev, LAN only).
+# Public apps (one level, e.g. linkding.claudebelanger.dev) never need a cert on thor:
+# Cloudflare presents theirs at its edge.
+# A wildcard matches one level only and not its own parent, hence both names.
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: lab-wildcard
+  namespace: kube-system        # same namespace as Traefik's default TLSStore below
+spec:
+  secretName: lab-wildcard-tls
+  issuerRef:
+    name: letsencrypt-staging   # step 1: staging. Switch to letsencrypt-prod once this is Ready.
+    kind: ClusterIssuer
+  dnsNames:
+    - "*.lab.claudebelanger.dev"
+    - "lab.claudebelanger.dev"

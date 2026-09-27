@@ -1,0 +1,11 @@
+# Makes the wildcard Traefik's DEFAULT certificate. Any Ingress with a tls: block and
+# no secretName gets it automatically, so private apps need no per-app certificate.
+# Traefik only honours a TLSStore named exactly "default".
+apiVersion: traefik.io/v1alpha1
+kind: TLSStore
+metadata:
+  name: default
+  namespace: kube-system
+spec:
+  defaultCertificate:
+    secretName: lab-wildcard-tls

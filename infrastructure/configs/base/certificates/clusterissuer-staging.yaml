@@ -1,0 +1,17 @@
+# Let's Encrypt STAGING: generous rate limits, untrusted certs. Prove the setup here first.
+# No email on purpose: this repo is public, and Let's Encrypt stopped sending expiry mails in 2025.
+apiVersion: cert-manager.io/v1
+kind: ClusterIssuer
+metadata:
+  name: letsencrypt-staging
+spec:
+  acme:
+    server: https://acme-staging-v02.api.letsencrypt.org/directory
+    privateKeySecretRef:
+      name: letsencrypt-staging-account-key   # created BY cert-manager; not the Cloudflare token
+    solvers:
+      - dns01:
+          cloudflare:
+            apiTokenSecretRef:
+              name: cloudflare-api-token
+              key: api-token

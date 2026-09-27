@@ -40,11 +40,14 @@ spec:
         ## Must be provided if Ingress is enable.
         ##
         hosts:
-          - grs.claudebelanger.dev
+          - grafana.lab.claudebelanger.dev
         ## TLS configuration for grafana Ingress
         ## Secret must be manually created in the namespace
         ##
-        tls: []
+        # No secretName: Traefik serves its default cert, the *.lab wildcard.
+        tls:
+          - hosts:
+              - grafana.lab.claudebelanger.dev
         # - secretName: grafana-general-tls
         #   hosts:
         #   - grafana.example.com

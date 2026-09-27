@@ -1,0 +1,39 @@
+# Two Kustomizations because a ClusterIssuer cannot exist before cert-manager's CRDs do.
+# wait: true makes infra-controllers report Ready only once the HelmRelease is healthy,
+# and dependsOn holds infra-configs back until then.
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infra-controllers
+  namespace: flux-system
+spec:
+  interval: 10m0s
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/controllers/staging
+  prune: true
+  wait: true
+---
+apiVersion: kustomize.toolkit.fluxcd.io/v1
+kind: Kustomization
+metadata:
+  name: infra-configs
+  namespace: flux-system
+spec:
+  dependsOn:
+    - name: infra-controllers
+  interval: 10m0s
+  retryInterval: 1m
+  timeout: 5m
+  sourceRef:
+    kind: GitRepository
+    name: flux-system
+  path: ./infrastructure/configs/staging
+  prune: true
+  decryption:
+    provider: sops
+    secretRef:
+      name: sops-age
