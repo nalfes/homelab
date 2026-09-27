@@ -37,12 +37,10 @@ spec:
         ## Should be provided if Ingress is enable.
         ##
         ingressClassName: traefik
-
-        
         ## Must be provided if Ingress is enable.
         ##
-         hosts:
-           - grs.claudebelanger.dev
+        hosts:
+          - grs.claudebelanger.dev
         ## TLS configuration for grafana Ingress
         ## Secret must be manually created in the namespace
         ##
