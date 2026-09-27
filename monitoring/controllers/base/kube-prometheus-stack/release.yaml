@@ -27,7 +27,10 @@ spec:
           kind: PrometheusRule
   values:
     grafana:
-      adminPassword: temporary
+      admin:
+        existingSecret: grafana-admin
+        userKey: admin-user
+        passwordKey: admin-password
       ingress:
         ## If true, Grafana Ingress will be created
         ##
