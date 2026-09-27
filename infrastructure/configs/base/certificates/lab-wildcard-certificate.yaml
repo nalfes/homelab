@@ -10,7 +10,7 @@ metadata:
 spec:
   secretName: lab-wildcard-tls
   issuerRef:
-    name: letsencrypt-staging   # step 1: staging. Switch to letsencrypt-prod once this is Ready.
+    name: letsencrypt-prod      # proven on staging first (2026-09-27), now production
     kind: ClusterIssuer
   dnsNames:
     - "*.lab.claudebelanger.dev"
