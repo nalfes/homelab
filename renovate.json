@@ -1,8 +1,16 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "dependencyDashboard": true,
   "kubernetes": {
-    "fileMatch": [
-      "\\.yaml$"
-    ]
-  }
+    "fileMatch": ["\\.yaml$"]
+  },
+  "flux": {
+    "fileMatch": ["\\.yaml$"]
+  },
+  "packageRules": [
+    {
+      "matchPackageNames": ["kube-prometheus-stack"],
+      "schedule": ["* 0-5 * * 1"]
+    }
+  ]
 }
