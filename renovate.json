@@ -2,14 +2,20 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "dependencyDashboard": true,
   "kubernetes": {
-    "fileMatch": ["\\.yaml$"]
+    "managerFilePatterns": ["/\\.yaml$/"]
   },
   "flux": {
-    "fileMatch": ["\\.yaml$"]
+    "managerFilePatterns": ["/\\.yaml$/"]
   },
   "packageRules": [
     {
+      "description": "kube-prometheus-stack releases several times a week: batch it into one PR, Monday before 06:00",
       "matchPackageNames": ["kube-prometheus-stack"],
+      "schedule": ["* 0-5 * * 1"]
+    },
+    {
+      "description": "Renovate releases almost daily: batch its own image the same way",
+      "matchPackageNames": ["renovate/renovate"],
       "schedule": ["* 0-5 * * 1"]
     }
   ]
