@@ -23,7 +23,7 @@ data:
     - hostname: mealie.claudebelanger.dev
       service: http://mealie.mealie.svc.cluster.local:9000
     - hostname: books.claudebelanger.dev
-      service: http://audiobookshelf.audiobookshelf.svc.cluster.local:9000
+      service: http://audiobookshelf.audiobookshelf.svc.cluster.local:3005
 
 
     # This rule matches any traffic which didn't match a previous rule, and responds with HTTP 404.
