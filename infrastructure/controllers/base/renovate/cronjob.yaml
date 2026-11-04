@@ -12,7 +12,7 @@ spec:
         spec:
           containers:
             - name: renovate
-              image: renovate/renovate:44.186.2
+              image: renovate/renovate:44.212.1
               args:
                 - nalfes/homelab
 
